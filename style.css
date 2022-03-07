@@ -60,7 +60,7 @@
     color: #084594;
     text-decoration: none;
     font-weight: 900;
-    font-size: 1em;
+    font-size: 4vw;
   }
 
   hr {
@@ -108,6 +108,14 @@
     padding-bottom: 50px;
   }
 
+  .header-how-it-works{
+    text-align: center;
+    background-image: linear-gradient(#F4FAD8, #D5F4FB, #D5F4FB, #D5F4FB, #D5F4FB);
+    font-weight: 900;
+    padding-bottom: 10px;
+
+  }
+
   .top-cloud {
     position: relative;
     left: 100px;
@@ -128,6 +136,11 @@
     background-color: #E8F7FA;
   }
 
+  .main-how-it-works{
+    text-align: center;
+    background-image: linear-gradient(#D5F4FB, #E8F7FA, #E8F7FA, #E8F7FA, #E8F7FA);
+  }
+
   .temperature-item {
     margin-bottom: 50px;
   }
@@ -140,6 +153,21 @@
     float: left;
     width: 20%;
     margin-left: 10px;
+  }
+
+  .cpu-image{
+
+  }
+
+  .server-image{
+
+  }
+
+  .tech-images{
+    padding-top: 10px;
+    display: flex;
+    justify-content: center;
+    justify-content: space-around;
   }
 
   .humidity-image{
