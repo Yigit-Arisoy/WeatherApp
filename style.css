@@ -26,10 +26,10 @@
 }
 
 @media (min-width: 300px) {
-
-  html{
+  html {
     scroll-behavior: smooth;
   }
+
   body {
     font-family: Montserrat;
     background-color: #faf9f9;
@@ -89,6 +89,15 @@
     background-image: linear-gradient(#FFFDB5, #F4FAD8)
   }
 
+  .navbar-people {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    background-color: #F1FAEE;
+    padding-bottom: 0;
+  }
+
   .nav-menu {
     display: flex;
     list-style: none;
@@ -102,27 +111,59 @@
     margin: 0 8px 0 8px
   }
 
-  .people-list{
+  .people-list {
     list-style: none;
     margin: 0;
     text-align: left;
-    padding-left: 40px;
-    padding-top: 40px;
+    padding-left: 0;
+    padding-top: 0;
   }
 
-  .person{
-  padding-bottom: 15px;
-  font-weight: bold;
-  font-size: 1.5em;
-  }
-
-  .work-list{
+  .person {
+    padding-bottom: 30px;
+    padding-top: 30px;
+    padding-left: 10px;
     margin: 0;
-    padding-left: 25px;
+    font-weight: bold;
+    font-size: 1.2em;
+  }
+
+  .work-list {
+    margin: 0;
+    padding-left: 10%;
+    padding-right: 10%;
     padding-top: 10px;
-    color: #084594;
-    font-weight:bolder;
+    font-weight: bolder;
     font-size: 0.8em;
+    list-style: disc;
+    line-height: 1.5em;
+  }
+
+  .work-list-gokberk {
+    padding-left: 10%;
+    padding-right: 10%;
+    text-align: left;
+    line-height: 1.5em;
+  }
+
+  #emin-photo {
+    width: 20%;
+    vertical-align: middle;
+    padding-right: 10px;
+    padding-left: 15px;
+  }
+
+  #gokberk-photo {
+    width: 20%;
+    vertical-align: middle;
+    padding-left: 10px;
+    padding-right: 30px;
+  }
+
+  #yigit-photo {
+    width: 20%;
+    vertical-align: middle;
+    padding-right: 10px;
   }
 
   #brand {
@@ -147,7 +188,7 @@
 
   .header-people {
     text-align: center;
-    background-image: linear-gradient(#F4FAD8, #D5F4FB, #D5F4FB, #D5F4FB, #D5F4FB);
+    background-color: #F1FAEE;
     font-weight: 900;
     padding-bottom: 0px;
     padding-top: 0px;
@@ -177,7 +218,6 @@
       transform: translateX(-300%) translateZ(0);
     }
   } */
-
   #temp1 {
     min-height: 30px;
     opacity: 1;
@@ -186,9 +226,8 @@
     filter: invert(10%);
   }
 
-  #temp1.fade{
+  #temp1.fade {
     opacity: 0;
-
   }
 
   /* MAIN MOBILE */
@@ -205,8 +244,20 @@
 
   .main-people {
     text-align: center;
-    background-image: linear-gradient(#D5F4FB,#E8F7FA,#E8F7FA, #E8F7FA, #E8F7FA, #E8F7FA, #E8F7FA);
-    padding-bottom: 30px;
+  }
+
+  #emin {
+    background-color: #90e0ef;
+  }
+
+  #gokberk {
+    text-align: right;
+    background-color: #E63946;
+    color: white;
+  }
+
+  #yigit {
+    background-color: #FEDD5F;
   }
 
   .temperature-item {
@@ -227,8 +278,8 @@
 
   .server-image {}
 
-  .people-image{
-    padding-top: 50px;
+  .people-image {
+    padding-top: 10px;
     padding-bottom: 20px;
   }
 
@@ -352,11 +403,16 @@
   /* FOOTER MOBILE */
   .footer {
     text-align: center;
-    background-image: linear-gradient(#E8F7FA,#D5F4FB,#D5F4FB, #D5F4FB, #D5F4FB, #D5F4FB, #D5F4FB);
+    background-image: linear-gradient(#E8F7FA, #D5F4FB, #D5F4FB, #D5F4FB, #D5F4FB, #D5F4FB, #D5F4FB);
     padding-top: 50px;
   }
 
-  .footer-link-image{
+  .footer-people {
+    background-image: none;
+    background-color: #F1FAEE;
+  }
+
+  .footer-link-image {
     width: 70%;
   }
 
