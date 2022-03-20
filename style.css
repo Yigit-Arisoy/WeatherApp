@@ -26,10 +26,16 @@
 }
 
 @media (min-width: 300px) {
+
+  html{
+    scroll-behavior: smooth;
+  }
   body {
     font-family: Montserrat;
     background-color: #faf9f9;
     margin: 0;
+    overflow: auto;
+    overflow-y: scroll;
   }
 
   h1 {
@@ -71,7 +77,7 @@
     border: 1px solid;
     border-radius: 10px;
     border-color: #398AB9;
-    padding: 50px auto 50px auto;
+    padding: 10px auto 50px auto;
   }
 
   /* NAVBAR MOBILE */
@@ -96,6 +102,29 @@
     margin: 0 8px 0 8px
   }
 
+  .people-list{
+    list-style: none;
+    margin: 0;
+    text-align: left;
+    padding-left: 40px;
+    padding-top: 40px;
+  }
+
+  .person{
+  padding-bottom: 15px;
+  font-weight: bold;
+  font-size: 1.5em;
+  }
+
+  .work-list{
+    margin: 0;
+    padding-left: 25px;
+    padding-top: 10px;
+    color: #084594;
+    font-weight:bolder;
+    font-size: 0.8em;
+  }
+
   #brand {
     margin-top: 20px;
     margin-bottom: 10px;
@@ -116,90 +145,49 @@
     padding-bottom: 10px;
   }
 
+  .header-people {
+    text-align: center;
+    background-image: linear-gradient(#F4FAD8, #D5F4FB, #D5F4FB, #D5F4FB, #D5F4FB);
+    font-weight: 900;
+    padding-bottom: 0px;
+    padding-top: 0px;
+  }
+
   .top-cloud {
     position: absolute;
     top: 110px;
     width: 80px;
-    animation: zoomies 11s infinite linear;
+    /* animation: zoomies 20s infinite linear; */
+    background-attachment: fixed;
+    left: 30px;
   }
 
   .bottom-cloud {
     position: absolute;
-    animation: zoomies 6s infinite linear;
+    /* animation: zoomies 40s infinite linear; */
+    background-attachment: fixed;
   }
 
-  @keyframes zoomies {
+  /* @keyframes zoomies {
     from {
-      left: 0;
-      transform: translateX(-100%);
+      transform: translateX(230%) translateZ(0);
     }
 
     to {
-      left: 100%;
-      transform: translateX(0%);
+      transform: translateX(-300%) translateZ(0);
     }
-  }
+  } */
 
-  .temp1{
+  #temp1 {
     min-height: 30px;
+    opacity: 1;
+    color: blue;
+    transition: opacity 0.4s ease-in-out, color 0.4s ease-in-out;
+    filter: invert(10%);
   }
 
-  .temp1::after {
-    content: "Dry ?";
-
-    animation: spin 10s linear infinite;
-
-  }
-
-  @keyframes spin {
-
-  0% {
+  #temp1.fade{
     opacity: 0;
-    content: "Hot ?"
-  }
-
-    12% {
-      opacity: 1;
-      color: red;
-      content: "Hot ?"
-
-    }
-
-    24% {
-      opacity: 0;
-
-    }
-
-    36% {
-      content: "Cold ?";
-      opacity: 1;
-      color: skyblue;
-
-    }
-
-    48% {
-      opacity: 0;
-    }
-
-    60% {
-      opacity: 1;
-      content: "Humid ?";
-      color: blue;
-    }
-
-    72% {
-      opacity: 0;
-    }
-
-    84% {
-      opacity: 1;
-      content: "Dry ?";
-      color: gray;
-    }
-
-    100% {
-      opacity: 0;
-    }
 
   }
 
@@ -212,6 +200,13 @@
   .main-how-it-works {
     text-align: center;
     background-image: linear-gradient(#D5F4FB, #E8F7FA, #E8F7FA, #E8F7FA, #E8F7FA);
+    padding-bottom: 30px;
+  }
+
+  .main-people {
+    text-align: center;
+    background-image: linear-gradient(#D5F4FB,#E8F7FA,#E8F7FA, #E8F7FA, #E8F7FA, #E8F7FA, #E8F7FA);
+    padding-bottom: 30px;
   }
 
   .temperature-item {
@@ -219,7 +214,7 @@
   }
 
   .humidity-item {
-    margin-bottom: 50px;
+    margin-bottom: 30px;
   }
 
   .temperature-image {
@@ -231,6 +226,11 @@
   .cpu-image {}
 
   .server-image {}
+
+  .people-image{
+    padding-top: 50px;
+    padding-bottom: 20px;
+  }
 
   .tech-images {
     padding-top: 10px;
@@ -352,7 +352,12 @@
   /* FOOTER MOBILE */
   .footer {
     text-align: center;
-    background-image: linear-gradient(#E8F7FA, #D5F4FB, #D5F4FB, #D5F4FB, #D5F4FB);
+    background-image: linear-gradient(#E8F7FA,#D5F4FB,#D5F4FB, #D5F4FB, #D5F4FB, #D5F4FB, #D5F4FB);
+    padding-top: 50px;
+  }
+
+  .footer-link-image{
+    width: 70%;
   }
 
   #get-in-touch {
@@ -364,7 +369,7 @@
   }
 
   .socials {
-    width: 80%;
+    width: 70%;
     margin: 50px auto 50px auto;
     display: flex;
     justify-content: space-between;
@@ -422,7 +427,7 @@
     border: 1px solid;
     border-radius: 10px;
     border-color: #398AB9;
-    padding: 50px auto 50px auto;
+    padding: 20px auto 50px auto;
     margin: 0 auto;
   }
 

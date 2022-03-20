@@ -14,9 +14,6 @@
 </head>
 
 <body>
-
-
-
   <nav class="navbar">
 
     <h3 id="brand">The Weather App</h3>
@@ -24,15 +21,10 @@
     <ul class="nav-menu">
       <li class="nav-item" style="text-shadow: 0px 0px 2px #7393E6;"><a class="nav-link" href="index.html">Home</a></li>
       <li class="nav-item"><a class="nav-link" href="how-it-works.html">How It Works</a></li>
-      <li class="nav-item"><a class="nav-link" href="#">People</a></li>
-      <li class="nav-item"><a class="nav-link" href="#">Contact</a></li>
-
-
+      <li class="nav-item"><a class="nav-link" href="people.html">People</a></li>
+      <li class="nav-item"><a class="nav-link" href="#Contact-Link">Contact</a></li>
     </ul>
   </nav>
-
-
-
 
   <div class="header">
     <img class="top-cloud" src="images/cloud.png" alt="">
@@ -40,13 +32,35 @@
     <p>How is it like today?</p>
 
     <div class="temps">
-      <p class="temp1"></p>
+      <p id="temp1"></p>
     </div>
 
+    <script type="text/javascript">
+      let tempText = document.getElementById("temp1");
+      let tempIndex = 0;
+      let temps = ["Hot?", "Cold?", "Humid?", "Dry?"];
+      let tempColors = ["red", "blue", "skyblue", "gray"];
+      let toggleTime = 1500;
+
+      function rgbText()
+      {
+          tempText.style.color = tempColors[tempIndex];
+          tempText.innerHTML = temps[tempIndex];
+          tempIndex = tempIndex + 1;
+          if(tempIndex >= 4)
+            tempIndex = 0;
+      }
+
+      function toggleOpacity()
+      {
+        tempText.classList.toggle("fade");
+      }
+
+      setInterval(rgbText, 3000);
+      setInterval(toggleOpacity, 1500);
+    </script>
 
     <img class="bottom-cloud" src="images/cloud.png" alt="">
-
-
   </div>
 
   <div class="main">
@@ -108,46 +122,29 @@
 
     <h3> Live Data </h3>
 
-    <div class="sk-folding-cube">
-      <div class="sk-cube1 sk-cube"></div>
-      <div class="sk-cube2 sk-cube"></div>
-      <div class="sk-cube4 sk-cube"></div>
-      <div class="sk-cube3 sk-cube"></div>
-    </div>
-
     <hr>
 
   </div>
 
-
-
   <div class="footer">
+    <a id="Contact-Link"></a>
     <h2 id="get-in-touch">Get In Touch</h2>
     <h3>Would you like to learn more?</h3>
-    <p>You can send us an e-mail or contact us social media.</p>
+    <p>You can send us an e-mail or contact us on our social media.</p>
 
     <div class="btn-container">
       <a class="btn" href="mailto:arisoy.yigit@gmail.com">SEND MAIL</a>
     </div>
 
     <div class="socials">
-      <a class="footer-link" href="https://www.linkedin.com/in/yigit-arisoy/"><img src="images/linkedin.png"></a>
-      <a class="footer-link" href="https://github.com/Yigit-Arisoy"><img src="images/github.png"></a>
-      <a class="footer-link" href="https://www.instagram.com/yigit_arsy/"><img src="images/instagram.png"></a>
+      <a class="footer-link" href="https://www.linkedin.com/in/yigit-arisoy/"><img src="images/linkedin.png" class="footer-link-image"></a>
+      <a class="footer-link" href="https://github.com/Yigit-Arisoy"><img src="images/github.png" class="footer-link-image"></a>
+      <a class="footer-link" href="https://www.instagram.com/yigit_arsy/"><img src="images/instagram.png" class="footer-link-image"></a>
     </div>
 
     <p>© Yiğit Arısoy 2022</p>
 
   </div>
-
-
-
-
-
-
-
-
-
 
 </body>
 
