@@ -13,7 +13,10 @@
 <body>
 
   <script type="text/javascript">
-    client = new Paho.MQTT.Client("broker.mqttdashboard.com", Number(8000), "clientId-myBrowser");
+    // client = new Paho.MQTT.Client("wss:qwe@broker.emqx.io:8084", "clientid");
+    client = new Paho.MQTT.Client("wss://qwe@broker.emqx.io:8084/mqtt", "yigitPC");
+    // client = new Paho.MQTT.Client("broker.emqx.io", Number(8084), "clientId-myBrowser");
+
 
     // set callback handlers
     client.onConnectionLost = onConnectionLost;
