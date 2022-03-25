@@ -5,6 +5,9 @@
   <meta charset="utf-8">
   <title></title>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/paho-mqtt/1.0.1/mqttws31.js" type="text/javascript"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Ephesis&family=Indie+Flower&family=Montserrat:wght@300&family=Shadows+Into+Light&display=swap" rel="stylesheet">
 </head>
 
 <body>
@@ -27,9 +30,6 @@
       // Once a connection has been made, make a subscription and send a message.
       console.log("onConnect");
       client.subscribe("yigit");
-      message = new Paho.MQTT.Message("https://www.youtube.com/watch?v=dQw4w9WgXcQ");
-      message.destinationName = "yigit";
-      client.send(message);
     }
 
     // called when the client loses its connection
@@ -42,8 +42,16 @@
     // called when a message arrives
     function onMessageArrived(message) {
       console.log("onMessageArrived:" + message.payloadString);
+      msgText = document.getElementById("messageText");
+      msgText.innerHTML = message.payloadString;
     }
   </script>
+
+  <p style="font-size: 2em; font-family: Montserrat, arial; font-weight:900;">Send a message from hivemq broker to the topic named: yigit.</p>
+
+  <hr>
+
+  <p id="messageText" style="font-size: 2em; font-family: Montserrat, arial; font-weight:900;">this is where the last message will be</p>
 
 </body>
 
