@@ -4,7 +4,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Yigit Arisoy</title>
+  <title>The Weather App</title>
 
   <link rel="stylesheet" href="./style.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -23,7 +23,6 @@
       <li class="nav-item"><a class="nav-link" href="how-it-works.html">How It Works</a></li>
       <li class="nav-item"><a class="nav-link" href="people.html">People</a></li>
       <li class="nav-item"><a class="nav-link" href="#Contact-Link">Contact</a></li>
-      <li class="nav-item"><a class="nav-link" href="mqtt_TEST.html">Mqtt</a></li>
     </ul>
   </nav>
 
@@ -68,11 +67,14 @@
     <div class="skills">
       <h2 style="margin:0 auto 0 auto; padding-bottom:30px;"></h2>
       <div class="temperature-item">
-        <h3>Temperature</h3>
+        <div class="temperature-title">
+                  <h3>Temperature</h3>
+        </div>
+
         <img class="temperature-image" src="images/thermometer.png" alt="">
 
-        <p>lorem</p>
-        <canvas id="myChart" width="100px" height="100px"></canvas>
+        <p id="currentTemp">lorem</p>
+        <!-- <canvas id="myChart" width="500px" height="1000px"></canvas>
         <script>
           const ctx = document.getElementById('myChart');
           const myChart = new Chart(ctx, {
@@ -109,7 +111,7 @@
               }
             }
           });
-        </script>
+        </script> -->
 
 
       </div>
@@ -117,11 +119,9 @@
         <h3>Humidity</h3>
         <img class="humidity-image" src="images/humidity.png" alt="">
 
-        <p>lorem</p>
+        <p id="currentHumidity">lorem</p>
       </div>
     </div>
-
-    <h3> Live Data </h3>
 
     <hr>
 
