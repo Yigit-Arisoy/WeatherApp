@@ -246,6 +246,10 @@
     text-align: center;
   }
 
+  .temp-graph{
+    object-fit: none;
+  }
+
   #emin {
     background-color: #90e0ef;
   }

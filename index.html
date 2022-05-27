@@ -10,7 +10,9 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Ephesis&family=Indie+Flower&family=Montserrat:wght@300&family=Shadows+Into+Light&display=swap" rel="stylesheet">
-  <script src="https://cdn.jsdelivr.net/npm/chart.js@3.7.1/dist/chart.min.js"> </script>
+  <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"> </script>
+  <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@2.0.0/dist/tf.min.js"></script>
+
 </head>
 
 <body>
@@ -36,23 +38,87 @@
     </div>
 
     <script type="text/javascript">
+      $.getJSON('https://api.thingspeak.com/channels/1717169/feeds.json',
+        function(data) {
+          let ay = new Array(10).fill(0);
+          let i = 0;
+          let sumx = 0,
+            sumxsq = 0,
+            sumy = 0,
+            sumxy = 0;
+          let sumx3 = 0,
+            sumx4 = 0,
+            sumxsqy = 0;
+          let a = Array(20).fill().map(() => Array(20).fill(0));
+          let b = new Array(20).fill(0);
+          let u = 0;
+          let n = 10;
+          let x = data.channel.last_entry_id;
+
+          for (let i = 0; i < 10; i++) {
+            ay[i] = parseInt(data.feeds[x - i - 1].field1);
+          }
+
+          let ax = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+
+          for (let i = 0; i < n; i++) {
+            sumx += ax[i];
+            sumxsq += ax[i] * ax[i];
+            sumx3 += ax[i] * ax[i] * ax[i];
+            sumx4 += ax[i] * ax[i] * ax[i] * ax[i];
+            sumy += ay[i];
+            sumxy += ax[i] * ay[i];
+            sumxsqy += ax[i] * ax[i] * ay[i];
+          }
+
+          a[0][0] = n;
+          a[0][1] = sumx;
+          a[0][2] = sumxsq;
+          a[0][3] = sumy;
+          a[1][0] = sumx;
+          a[1][1] = sumxsq;
+          a[1][2] = sumx3;
+          a[1][3] = sumxy;
+          a[2][0] = sumxsq;
+          a[2][1] = sumx3;
+          a[2][2] = sumx4;
+          a[2][3] = sumxsqy;
+
+          for (let k = 0; k <= 2; k++) {
+            for (let i = 0; i <= 2; i++) {
+              if (i != k)
+                u = a[i][k] / a[k][k];
+              for (let j = k; j <= 3; j++)
+                a[i][j] = a[i][j] - u * a[k][j];
+            }
+          }
+
+          for (let i = 0; i < 3; i++) {
+            b[i] = a[i][3] / a[i][i];
+          }
+
+          prediction = b[2] * 11 * 11 + b[1] * 11 + b[0];
+          console.log(prediction);
+
+        });
+    </script>
+
+    <script type="text/javascript">
       let tempText = document.getElementById("temp1");
       let tempIndex = 0;
       let temps = ["Hot?", "Cold?", "Humid?", "Dry?"];
       let tempColors = ["red", "blue", "skyblue", "gray"];
       let toggleTime = 1500;
 
-      function rgbText()
-      {
-          tempText.style.color = tempColors[tempIndex];
-          tempText.innerHTML = temps[tempIndex];
-          tempIndex = tempIndex + 1;
-          if(tempIndex >= 4)
-            tempIndex = 0;
+      function rgbText() {
+        tempText.style.color = tempColors[tempIndex];
+        tempText.innerHTML = temps[tempIndex];
+        tempIndex = tempIndex + 1;
+        if (tempIndex >= 4)
+          tempIndex = 0;
       }
 
-      function toggleOpacity()
-      {
+      function toggleOpacity() {
         tempText.classList.toggle("fade");
       }
 
@@ -67,59 +133,14 @@
     <div class="skills">
       <h2 style="margin:0 auto 0 auto; padding-bottom:30px;"></h2>
       <div class="temperature-item">
-        <div class="temperature-title">
-                  <h3>Temperature</h3>
-        </div>
-
         <img class="temperature-image" src="images/thermometer.png" alt="">
-
-        <p id="currentTemp">lorem</p>
-        <!-- <canvas id="myChart" width="500px" height="1000px"></canvas>
-        <script>
-          const ctx = document.getElementById('myChart');
-          const myChart = new Chart(ctx, {
-            type: 'line',
-            data: {
-              labels: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'],
-              datasets: [{
-                label: 'Days',
-                data: [12, 19, 3, 5, 2, 3],
-                backgroundColor: [
-                  'rgba(255, 99, 132, 0.2)',
-                  'rgba(54, 162, 235, 0.2)',
-                  'rgba(255, 206, 86, 0.2)',
-                  'rgba(75, 192, 192, 0.2)',
-                  'rgba(153, 102, 255, 0.2)',
-                  'rgba(255, 159, 64, 0.2)'
-                ],
-                borderColor: [
-                  'rgba(255, 99, 132, 1)',
-                  'rgba(54, 162, 235, 1)',
-                  'rgba(255, 206, 86, 1)',
-                  'rgba(75, 192, 192, 1)',
-                  'rgba(153, 102, 255, 1)',
-                  'rgba(255, 159, 64, 1)'
-                ],
-                borderWidth: 1
-              }]
-            },
-            options: {
-              scales: {
-                y: {
-                  beginAtZero: true
-                }
-              }
-            }
-          });
-        </script> -->
-
-
+        <iframe class="temp-graph" width="450" height="260" style="border: 1px solid #cccccc;"
+          src="https://thingspeak.com/channels/1717169/charts/1?bgcolor=%23E8F7FA&color=%23d62020&dynamic=true&results=60&title=Temperature&type=line&xaxis=Time+of+the+Day&yaxis=Celcius"></iframe>
       </div>
-      <div class="humidity-item">
-        <h3>Humidity</h3>
-        <img class="humidity-image" src="images/humidity.png" alt="">
 
-        <p id="currentHumidity">lorem</p>
+      <div class="humidity-item">
+        <img class="humidity-image" src="images/humidity.png" alt="">
+        <iframe width="450" height="260" style="border: 1px solid #cccccc;" src="https://thingspeak.com/channels/1717169/charts/2?bgcolor=%23E8F7FA&color=%23d62020&dynamic=true&results=60&title=Humidity&type=line&yaxis=Humidity"></iframe>
       </div>
     </div>
 
