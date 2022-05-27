@@ -38,72 +38,6 @@
     </div>
 
     <script type="text/javascript">
-      $.getJSON('https://api.thingspeak.com/channels/1717169/feeds.json',
-        function(data) {
-          let ay = new Array(10).fill(0);
-          let i = 0;
-          let sumx = 0,
-            sumxsq = 0,
-            sumy = 0,
-            sumxy = 0;
-          let sumx3 = 0,
-            sumx4 = 0,
-            sumxsqy = 0;
-          let a = Array(20).fill().map(() => Array(20).fill(0));
-          let b = new Array(20).fill(0);
-          let u = 0;
-          let n = 10;
-          let x = data.channel.last_entry_id;
-
-          for (let i = 0; i < 10; i++) {
-            ay[i] = parseInt(data.feeds[x - i - 1].field1);
-          }
-
-          let ax = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
-
-          for (let i = 0; i < n; i++) {
-            sumx += ax[i];
-            sumxsq += ax[i] * ax[i];
-            sumx3 += ax[i] * ax[i] * ax[i];
-            sumx4 += ax[i] * ax[i] * ax[i] * ax[i];
-            sumy += ay[i];
-            sumxy += ax[i] * ay[i];
-            sumxsqy += ax[i] * ax[i] * ay[i];
-          }
-
-          a[0][0] = n;
-          a[0][1] = sumx;
-          a[0][2] = sumxsq;
-          a[0][3] = sumy;
-          a[1][0] = sumx;
-          a[1][1] = sumxsq;
-          a[1][2] = sumx3;
-          a[1][3] = sumxy;
-          a[2][0] = sumxsq;
-          a[2][1] = sumx3;
-          a[2][2] = sumx4;
-          a[2][3] = sumxsqy;
-
-          for (let k = 0; k <= 2; k++) {
-            for (let i = 0; i <= 2; i++) {
-              if (i != k)
-                u = a[i][k] / a[k][k];
-              for (let j = k; j <= 3; j++)
-                a[i][j] = a[i][j] - u * a[k][j];
-            }
-          }
-
-          for (let i = 0; i < 3; i++) {
-            b[i] = a[i][3] / a[i][i];
-          }
-
-          prediction = b[2] * 11 * 11 + b[1] * 11 + b[0];
-          console.log(prediction);
-
-        });
-    </script>
-
-    <script type="text/javascript">
       let tempText = document.getElementById("temp1");
       let tempIndex = 0;
       let temps = ["Hot?", "Cold?", "Humid?", "Dry?"];
@@ -129,6 +63,148 @@
     <img class="bottom-cloud" src="images/cloud.png" alt="">
   </div>
 
+
+
+  <div class="dashboard">
+    <div class="container">
+      <div class="weather-side">
+        <div class="weather-gradient"></div>
+        <div class="date-container">
+
+        </div>
+        <div class="weather-container"><i class="weather-icon" data-feather="sun"></i>
+          <h1 class="weather-temp" id="currentTemp">29°C</h1>
+        </div>
+      </div>
+      <div class="info-side">
+        <div class="today-info-container">
+          <div class="today-info">
+            <div class="precipitation"> <span class="title">TEMPERATURE</span><span class="value" id="currentTemp2">29°C</span>
+              <div class="clear"></div>
+            </div>
+            <div class="humidity"> <span class="title">APPARENT TEMP</span><span class="value" id="currentApparent">27°C</span>
+              <div class="clear"></div>
+            </div>
+            <div class="wind"> <span class="title">HUMIDITY</span><span class="value" id="currentHumidity">40%</span>
+
+            </div>
+          </div>
+        </div>
+        <div class="week-container">
+          <ul class="week-list">
+            <li class="active"><i class="day-icon" data-feather="sun"></i><span class="day-name" id="2nd-hour">Tue</span><span class="day-temp" id="2nd-pred">29°C</span></li>
+            <li><i class="day-icon" data-feather="cloud"></i><span class="day-name" id="3rd-hour">Wed</span><span class="day-temp" id="3rd-pred">21°C</span></li>
+            <li><i class="day-icon" data-feather="cloud-snow"></i><span class="day-name" id="4th-hour">Thu</span><span class="day-temp" id="4th-pred">08°C</span></li>
+            <li><i class="day-icon" data-feather="cloud-rain"></i><span class="day-name" id="5th-hour">Fry</span><span class="day-temp" id="5th-pred">19°C</span></li>
+            <div class="clear"></div>
+          </ul>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+
+  <script type="text/javascript">
+    var prediction = 0;
+    var prediction2 = 0;
+    var prediction3 = 0;
+    var prediction4 = 0;
+    var prediction5 = 0;
+
+    $.getJSON('https://api.thingspeak.com/channels/1717169/feeds.json',
+      function(data) {
+        let ay = new Array(10).fill(0);
+        let i = 0;
+        let sumx = 0,
+          sumxsq = 0,
+          sumy = 0,
+          sumxy = 0;
+        let sumx3 = 0,
+          sumx4 = 0,
+          sumxsqy = 0;
+        let a = Array(20).fill().map(() => Array(20).fill(0));
+        let b = new Array(20).fill(0);
+        let u = 0;
+        let n = 10;
+        let x = data.channel.last_entry_id;
+
+        for (let i = 0; i < 10; i++) {
+          ay[i] = parseInt(data.feeds[x - i - 1].field1);
+        }
+
+        let humidity = data.feeds[x - 1].field2;
+        let apparent = data.feeds[x - 1].field3;
+
+
+
+        let ax = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+
+        for (let i = 0; i < n; i++) {
+          sumx += ax[i];
+          sumxsq += ax[i] * ax[i];
+          sumx3 += ax[i] * ax[i] * ax[i];
+          sumx4 += ax[i] * ax[i] * ax[i] * ax[i];
+          sumy += ay[i];
+          sumxy += ax[i] * ay[i];
+          sumxsqy += ax[i] * ax[i] * ay[i];
+        }
+
+        a[0][0] = n;
+        a[0][1] = sumx;
+        a[0][2] = sumxsq;
+        a[0][3] = sumy;
+        a[1][0] = sumx;
+        a[1][1] = sumxsq;
+        a[1][2] = sumx3;
+        a[1][3] = sumxy;
+        a[2][0] = sumxsq;
+        a[2][1] = sumx3;
+        a[2][2] = sumx4;
+        a[2][3] = sumxsqy;
+
+        for (let k = 0; k <= 2; k++) {
+          for (let i = 0; i <= 2; i++) {
+            if (i != k)
+              u = a[i][k] / a[k][k];
+            for (let j = k; j <= 3; j++)
+              a[i][j] = a[i][j] - u * a[k][j];
+          }
+        }
+
+        for (let i = 0; i < 3; i++) {
+          b[i] = a[i][3] / a[i][i];
+        }
+
+        prediction = b[2] * 11 * 11 + b[1] * 11 + b[0];
+        prediction2 = b[2] * 12 * 12 + b[1] * 12 + b[0];
+        prediction3 = b[2] * 13 * 13 + b[1] * 13 + b[0];
+        prediction4 = b[2] * 14 * 14 + b[1] * 14 + b[0];
+        prediction5 = b[2] * 15 * 15 + b[1] * 15 + b[0];
+
+        console.log(prediction);
+
+        const d = new Date();
+        let hour = d.getHours();
+        document.getElementById("2nd-hour").innerHTML = (hour).toString() + ":00";
+        document.getElementById("3rd-hour").innerHTML = (hour + 1).toString() + ":00";
+        document.getElementById("4th-hour").innerHTML = (hour + 2).toString() + ":00";
+        document.getElementById("5th-hour").innerHTML = (hour + 3).toString() + ":00";
+
+        document.getElementById("currentTemp").innerHTML = (ay[0]).toString() + "°C";
+        document.getElementById("currentTemp2").innerHTML = (ay[0]).toString() + "°C";
+
+        document.getElementById("currentHumidity").innerHTML = (humidity).toString() + "%";
+        document.getElementById("currentApparent").innerHTML = (apparent).toString() + "%";
+
+        document.getElementById("2nd-pred").innerHTML = (ay[0]).toString() + "°C";
+        document.getElementById("3rd-pred").innerHTML = (prediction3).toString() + "°C";
+        document.getElementById("4th-pred").innerHTML = (prediction4).toString() + "°C";
+        document.getElementById("5th-pred").innerHTML = (prediction5).toString() + "°C";
+
+      });
+  </script>
+
   <div class="main">
     <div class="skills">
       <h2 style="margin:0 auto 0 auto; padding-bottom:30px;"></h2>
@@ -140,7 +216,7 @@
 
       <div class="humidity-item">
         <img class="humidity-image" src="images/humidity.png" alt="">
-        <iframe width="450" height="260" style="border: 1px solid #cccccc;" src="https://thingspeak.com/channels/1717169/charts/2?bgcolor=%23E8F7FA&color=%23d62020&dynamic=true&results=60&title=Humidity&type=line&yaxis=Humidity"></iframe>
+        <iframe width="450" height="260" style="border: 1px solid #cccccc;" src="https://thingspeak.com/channels/1717169/charts/2?bgcolor=%23E8F7FA&color=%23d62020&dynamic=true&results=60&title=Humidity&type=line&xaxis=Time+of+the+Day&yaxis=Humidity"></iframe>
       </div>
     </div>
 
