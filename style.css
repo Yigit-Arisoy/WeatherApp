@@ -692,8 +692,8 @@
   height: 100%;
   border-radius: 25px;
   background-size: auto;
-  background-image: url("/images/sky.jpg");
-  width: 300px;
+  background-image: url("images/sky.jpg");
+  width: 400px;
   -webkit-box-shadow: 0 0 20px -10px rgba(0, 0, 0, 0.2);
           box-shadow: 0 0 20px -10px rgba(0, 0, 0, 0.2);
   -webkit-transition: -webkit-transform 300ms ease;
@@ -774,6 +774,10 @@
   float: left;
   height: 100%;
   padding-top: 25px;
+}
+
+.title{
+  margin: 0 25px 0 0;
 }
 
 .today-info {

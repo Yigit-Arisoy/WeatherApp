@@ -179,8 +179,6 @@
         prediction = b[2] * 11 * 11 + b[1] * 11 + b[0];
         prediction2 = b[2] * 12 * 12 + b[1] * 12 + b[0];
         prediction3 = b[2] * 13 * 13 + b[1] * 13 + b[0];
-        prediction4 = b[2] * 14 * 14 + b[1] * 14 + b[0];
-        prediction5 = b[2] * 15 * 15 + b[1] * 15 + b[0];
 
         console.log(prediction);
 
@@ -195,12 +193,12 @@
         document.getElementById("currentTemp2").innerHTML = (ay[0]).toString() + "°C";
 
         document.getElementById("currentHumidity").innerHTML = (humidity).toString() + "%";
-        document.getElementById("currentApparent").innerHTML = (apparent).toString() + "%";
+        document.getElementById("currentApparent").innerHTML = (apparent).toString() + "°C";
 
         document.getElementById("2nd-pred").innerHTML = (ay[0]).toString() + "°C";
-        document.getElementById("3rd-pred").innerHTML = (prediction3).toString() + "°C";
-        document.getElementById("4th-pred").innerHTML = (prediction4).toString() + "°C";
-        document.getElementById("5th-pred").innerHTML = (prediction5).toString() + "°C";
+        document.getElementById("3rd-pred").innerHTML = parseInt(prediction).toString() + "°C";
+        document.getElementById("4th-pred").innerHTML = parseInt(prediction2).toString() + "°C";
+        document.getElementById("5th-pred").innerHTML = parseInt(prediction3).toString() + "°C";
 
       });
   </script>
